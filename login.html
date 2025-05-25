@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OABOOK - Login</title>
+    <style>
+        body {
+            background: #f0f2f5;
+            margin: 0;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            padding-right: 40px;
+        }
+        .logo {
+            color: #1877f2;
+            font-size: 56px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+        .desc {
+            font-size: 28px;
+            color: #1c1e21;
+            max-width: 400px;
+        }
+        .right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        .login-box {
+            background: #fff;
+            padding: 32px 24px 24px 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: 360px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .login-box input {
+            padding: 14px 12px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+        .login-box input:focus {
+            border-color: #1877f2;
+            outline: none;
+        }
+        .login-btn {
+            background: #1877f2;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px 0;
+            cursor: pointer;
+            margin-bottom: 8px;
+            transition: background 0.2s;
+        }
+        .login-btn:hover {
+            background: #166fe5;
+        }
+        .error {
+            color: #d32f2f;
+            font-size: 15px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .divider {
+            border-bottom: 1px solid #dadde1;
+            margin: 8px 0 12px 0;
+        }
+        .create-btn {
+            background: #42b72a;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 17px;
+            font-weight: bold;
+            padding: 12px 0;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        .create-btn:hover {
+            background: #36a420;
+        }
+        @media (max-width: 900px) {
+            .container { flex-direction: column; }
+            .left, .right { flex: unset; padding: 0; align-items: center; }
+            .desc { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="logo">OABOOK</div>
+            <div class="desc">OABOOK Prepare you for the OAs.</div>
+        </div>
+        <div class="right">
+            <form class="login-box" id="loginForm" autocomplete="off">
+                <input type="email" id="loginEmail" placeholder="Email address" required>
+                <input type="password" id="loginPassword" placeholder="Password" required minlength="6">
+                <div class="error" id="loginError"></div>
+                <button type="submit" class="login-btn">Log in</button>
+                <div class="divider"></div>
+                <button type="button" class="create-btn" onclick="window.location.href='index.html#signup'">Create new account</button>
+            </form>
+        </div>
+    </div>
+    <script>
+    // Redirect to home if already logged in
+    if (localStorage.getItem('oabook_logged_in') === 'true') {
+        window.location.href = 'index.html#home';
+    }
+    document.getElementById('loginForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value;
+        const errorDiv = document.getElementById('loginError');
+        errorDiv.textContent = '';
+        if (!email || !password) {
+            errorDiv.textContent = 'Please enter both email and password.';
+            return;
+        }
+        try {
+            const res = await fetch('http://127.0.0.1:5000/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+            if (data.success) {
+                localStorage.setItem('oabook_logged_in', 'true');
+                localStorage.setItem('oabook_user', data.name || '');
+                window.location.href = 'index.html#home';
+            } else {
+                errorDiv.textContent = data.message || 'Login failed.';
+            }
+        } catch (err) {
+            errorDiv.textContent = 'Server error. Please try again.';
+        }
+    };
+    </script>
+</body>
+</html> 
