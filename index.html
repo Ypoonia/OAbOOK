@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OABOK - Online Assessment Book</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f2f2f2;
+        }
+
+        .header {
+            background-color: #3b5998;
+            height: 82px;
+            border-bottom: 1px solid #133783;
+        }
+
+        .header-content {
+            width: 960px;
+            margin: 0 auto;
+            padding: 12px 0;
+        }
+
+        .logo {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            text-decoration: none;
+            float: left;
+            margin-top: 8px;
+        }
+
+        .nav-container {
+            background-color: #f2f2f2;
+            border-bottom: 1px solid #dddfe2;
+        }
+
+        .nav {
+            width: 960px;
+            margin: 0 auto;
+            height: 43px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-tabs {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-tabs li {
+            margin-right: 2px;
+        }
+
+        .nav-tabs a {
+            text-decoration: none;
+            color: #3b5998;
+            font-weight: bold;
+            padding: 12px 16px;
+            display: block;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        }
+
+        .nav-tabs a:hover {
+            background-color: #e9ebee;
+        }
+
+        .nav-tabs a.active {
+            background-color: #e9ebee;
+        }
+
+        .main-content {
+            width: 960px;
+            margin: 20px auto;
+            background-color: white;
+            border: 1px solid #dddfe2;
+            border-radius: 3px;
+            padding: 20px;
+            min-height: 500px;
+        }
+
+        .welcome-text {
+            font-size: 24px;
+            color: #1d2129;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            color: #4b4f56;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <a href="#" class="logo">OABOK</a>
+        </div> 
+    </div>
+    
+    <div class="nav-container">
+        <nav class="nav">
+            <ul class="nav-tabs">
+                <li><a href="#" class="active">Problemset</a></li>
+                <li><a href="#">Companywise</a></li>
+                <li><a href="#">Random</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <h1 class="welcome-text">Welcome to OABOK</h1>
+        <p class="description">
+            Practice coding problems, prepare for technical interviews, and improve your programming skills. Choose from our carefully curated problem sets, company-specific questions, or try random challenges to test your abilities.
+        </p>
+    </div>
+</body>
+</html> 
